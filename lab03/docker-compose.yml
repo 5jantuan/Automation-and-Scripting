@@ -1,0 +1,6 @@
+version: "3.9"
+services:
+  currency-exchange:
+    build: .
+    container_name: currency-exchange
+    restart: always

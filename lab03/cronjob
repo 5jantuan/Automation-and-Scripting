@@ -1,0 +1,7 @@
+# Ежедневно в 6:00 утра брать курс MDL → EUR за предыдущий день
+0 6 * * * python3 /app/currency_exchange_rate.py MDL EUR $(date -d "yesterday" '+\%Y-\%m-\%d') >> /var/log/cron.log 2>&1
+
+# Еженедельно в пятницу в 17:00 брать курс MDL → USD за прошлую неделю
+0 17 * * 5 python3 /app/currency_exchange_rate.py MDL USD $(date -d "last Friday" '+\%Y-\%m-\%d') >> /var/log/cron.log 2>&1
+
+* * * * * echo 'Cron works $(date)' >> /var/log/cron.log 2>&1
