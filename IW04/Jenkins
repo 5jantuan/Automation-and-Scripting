@@ -1,0 +1,36 @@
+pipeline {
+    agent { label 'php-agent' }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/ТВОЙ_РЕПОЗИТОРИЙ.git', branch: 'main'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'composer install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh './vendor/bin/phpunit'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'All stages completed successfully!'
+        }
+        failure {
+            echo 'Errors detected in the pipeline.'
+        }
+    }
+}
