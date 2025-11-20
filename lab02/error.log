@@ -1,0 +1,15 @@
+2025-09-29 18:35:11,725 - ERROR - Error while fetching USD->EUR for 2025-01-01: Invalid response. Check provided parameters.
+2025-09-29 18:36:22,667 - ERROR - Error while fetching USD->EUR for 2025-05-09: Invalid response. Check provided parameters.
+2025-09-29 18:37:31,437 - ERROR - Error while fetching USD->EUR for 2023-01-01: Invalid response. Check provided parameters.
+2025-09-29 18:38:02,482 - ERROR - Error while fetching USD->EUR for 2024-05-09: Invalid response. Check provided parameters.
+2025-09-29 18:45:13.972240 - Error while fetching USD->EUR for 2025-01-01: Invalid response.
+2025-09-29 18:49:43.356023 - {'code': 101, 'type': 'missing_access_key', 'info': 'You have not supplied an API Access Key. [Required format: access_key=YOUR_ACCESS_KEY]'}
+2025-09-29 19:01:11.633255 - {'code': 101, 'type': 'missing_access_key', 'info': 'You have not supplied an API Access Key. [Required format: access_key=YOUR_ACCESS_KEY]'}
+2025-09-29 19:06:09.208474 - Expecting value: line 1 column 1 (char 0)
+2025-09-29 21:58:02.541476 - API key is missing
+2025-09-29 22:02:12.846210 - API key is missing
+2025-09-29 22:05:51.370961 - API key is missing
+2025-09-29 22:09:47.709872 - API key is missing
+2025-09-29T19:13:36.702892Z - Invalid JSON in response.
+2025-09-29T19:18:01.336412Z - Service returned an error: 
+2025-09-29 22:24:22.432586 - {'code': 101, 'type': 'missing_access_key', 'info': 'You have not supplied an API Access Key. [Required format: access_key=YOUR_ACCESS_KEY]'}
