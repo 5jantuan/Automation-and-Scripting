@@ -1,0 +1,21 @@
+FROM ubuntu:22.04
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y openssh-server apache2 php libapache2-mod-php sudo && \
+    useradd -m ansible && \
+    usermod -aG sudo ansible && \
+    echo "ansible ALL=(ALL) NOPASSWD:ALL" | tee /etc/sudoers.d/ansible && \
+    chmod 0440 /etc/sudoers.d/ansible
+
+
+COPY secrets/ansible-to-host-key.pub /home/ansible/.ssh/authorized_keys
+RUN chmod 600 /home/ansible/.ssh/authorized_keys
+RUN chown ansible:ansible /home/ansible/.ssh/authorized_keys
+
+EXPOSE 22
+EXPOSE 80
+
+RUN mkdir /run/sshd
+
+CMD ["/usr/sbin/sshd", "-D"]

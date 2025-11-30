@@ -1,0 +1,41 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+
+# Обновление и установка необходимых пакетов
+RUN apt-get update && \
+    apt-get install -y \
+        openssh-server \
+        python3 \
+        sudo \
+        ansible \
+        git \
+        openssh-client \
+        openjdk-21-jdk-headless \
+        curl \
+        wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Создаем пользователя ansible
+RUN useradd -ms /bin/bash ansible && \
+    mkdir -p /home/ansible/.ssh && \
+    mkdir -p /home/ansible/ansible && \
+    chown -R ansible:ansible /home/ansible/.ssh
+
+# Копируем ключи 
+COPY secrets/jenkins-to-slave-key.pub /home/ansible/.ssh/authorized_keys 
+COPY secrets/ansible-to-host-key /home/ansible/.ssh/id_rsa 
+RUN chmod 600 /home/ansible/.ssh/id_rsa 
+RUN chown ansible:ansible /home/ansible/.ssh/id_rsa
+
+# Настройка SSH
+RUN mkdir /var/run/sshd
+
+EXPOSE 22
+
+# Запуск SSH демона
+CMD ["/usr/sbin/sshd", "-D"]

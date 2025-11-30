@@ -1,0 +1,37 @@
+---
+- name: Настройка тестового сервера
+  hosts: test_server
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Обновление пакетов
+      apt:
+        update_cache: true
+        upgrade: dist
+
+    - name: Установка Apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: Установка PHP и расширений
+      apt:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-mysql
+        state: present
+
+    - name: Копирование виртуального хоста
+      copy:
+        src: apache_test_project.conf
+        dest: /etc/apache2/sites-available/000-default.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Перезапуск Apache
+      service:
+        name: apache2
+        state: restarted
